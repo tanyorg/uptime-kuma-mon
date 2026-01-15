@@ -235,10 +235,7 @@
                                 />
 
                                 <!-- eslint-disable-next-line vue/no-v-html -->
-                                <div
-                                    class="form-text"
-                                    v-html="$t('jsonQueryDescription')"
-                                ></div>
+                                <div class="form-text" v-html="$t('jsonQueryDescription')"></div>
                                 <br />
 
                                 <label for="expectedValue" class="form-label">{{
