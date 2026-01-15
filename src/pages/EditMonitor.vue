@@ -112,9 +112,9 @@
                             <div
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'json-query' ||
-                                    monitor.type === 'real-browser'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'json-query' ||
+                                        monitor.type === 'real-browser'
                                 "
                                 class="my-3"
                             >
@@ -174,7 +174,7 @@
                             <div
                                 v-if="
                                     monitor.type === 'keyword' ||
-                                    monitor.type === 'grpc-keyword'
+                                        monitor.type === 'grpc-keyword'
                                 "
                                 class="my-3"
                             >
@@ -197,7 +197,7 @@
                             <div
                                 v-if="
                                     monitor.type === 'keyword' ||
-                                    monitor.type === 'grpc-keyword'
+                                        monitor.type === 'grpc-keyword'
                                 "
                                 class="my-3 form-check"
                             >
@@ -281,8 +281,7 @@
                                     <label
                                         for="kafkaProducerBrokers"
                                         class="form-label"
-                                        >{{ $t("Kafka Brokers") }}</label
-                                    >
+                                    >{{ $t("Kafka Brokers") }}</label>
                                     <VueMultiselect
                                         id="kafkaProducerBrokers"
                                         v-model="monitor.kafkaProducerBrokers"
@@ -310,8 +309,7 @@
                                     <label
                                         for="kafkaProducerTopic"
                                         class="form-label"
-                                        >{{ $t("Kafka Topic Name") }}</label
-                                    >
+                                    >{{ $t("Kafka Topic Name") }}</label>
                                     <input
                                         id="kafkaProducerTopic"
                                         v-model="monitor.kafkaProducerTopic"
@@ -326,10 +324,9 @@
                                     <label
                                         for="kafkaProducerMessage"
                                         class="form-label"
-                                        >{{
-                                            $t("Kafka Producer Message")
-                                        }}</label
-                                    >
+                                    >{{
+                                        $t("Kafka Producer Message")
+                                    }}</label>
                                     <input
                                         id="kafkaProducerMessage"
                                         v-model="monitor.kafkaProducerMessage"
@@ -383,14 +380,14 @@
                             <div
                                 v-if="
                                     monitor.type === 'port' ||
-                                    monitor.type === 'ping' ||
-                                    monitor.type === 'dns' ||
-                                    monitor.type === 'steam' ||
-                                    monitor.type === 'gamedig' ||
-                                    monitor.type === 'mqtt' ||
-                                    monitor.type === 'radius' ||
-                                    monitor.type === 'ntp' ||
-                                    monitor.type === 'tailscale-ping'
+                                        monitor.type === 'ping' ||
+                                        monitor.type === 'dns' ||
+                                        monitor.type === 'steam' ||
+                                        monitor.type === 'gamedig' ||
+                                        monitor.type === 'mqtt' ||
+                                        monitor.type === 'radius' ||
+                                        monitor.type === 'ntp' ||
+                                        monitor.type === 'tailscale-ping'
                                 "
                                 class="my-3"
                             >
@@ -412,11 +409,11 @@
                             <div
                                 v-if="
                                     monitor.type === 'port' ||
-                                    monitor.type === 'steam' ||
-                                    monitor.type === 'gamedig' ||
-                                    monitor.type === 'ntp' ||
-                                    monitor.type === 'mqtt' ||
-                                    monitor.type === 'radius'
+                                        monitor.type === 'steam' ||
+                                        monitor.type === 'gamedig' ||
+                                        monitor.type === 'ntp' ||
+                                        monitor.type === 'mqtt' ||
+                                        monitor.type === 'radius'
                                 "
                                 class="my-3"
                             >
@@ -442,8 +439,7 @@
                                     <label
                                         for="dns_resolve_server"
                                         class="form-label"
-                                        >{{ $t("Resolver Server") }}</label
-                                    >
+                                    >{{ $t("Resolver Server") }}</label>
                                     <input
                                         id="dns_resolve_server"
                                         v-model="monitor.dns_resolve_server"
@@ -481,8 +477,7 @@
                                     <label
                                         for="dns_resolve_type"
                                         class="form-label"
-                                        >{{ $t("Resource Record Type") }}</label
-                                    >
+                                    >{{ $t("Resource Record Type") }}</label>
 
                                     <!-- :allow-empty="false" is not working, set a default value instead https://github.com/shentao/vue-multiselect/issues/336   -->
                                     <VueMultiselect
@@ -511,8 +506,7 @@
                                 <label
                                     for="docker_container"
                                     class="form-label"
-                                    >{{ $t("Container Name / ID") }}</label
-                                >
+                                >{{ $t("Container Name / ID") }}</label>
                                 <input
                                     id="docker_container"
                                     v-model="monitor.docker_container"
@@ -529,8 +523,7 @@
                                     <label
                                         for="docker-host"
                                         class="form-label"
-                                        >{{ $t("Docker Host") }}</label
-                                    >
+                                    >{{ $t("Docker Host") }}</label>
                                     <ActionSelect
                                         id="docker-host"
                                         v-model="monitor.docker_host"
@@ -543,7 +536,7 @@
                                         :options="dockerHostOptionsList"
                                         :disabled="
                                             $root.dockerHostList == null ||
-                                            $root.dockerHostList.length === 0
+                                                $root.dockerHostList.length === 0
                                         "
                                         :icon="'plus'"
                                         :action="
@@ -558,9 +551,7 @@
                             <!-- For MQTT Type -->
                             <template v-if="monitor.type === 'mqtt'">
                                 <div class="my-3">
-                                    <label for="mqttUsername" class="form-label"
-                                        >MQTT {{ $t("Username") }}</label
-                                    >
+                                    <label for="mqttUsername" class="form-label">MQTT {{ $t("Username") }}</label>
                                     <input
                                         id="mqttUsername"
                                         v-model="monitor.mqttUsername"
@@ -570,9 +561,7 @@
                                 </div>
 
                                 <div class="my-3">
-                                    <label for="mqttPassword" class="form-label"
-                                        >MQTT {{ $t("Password") }}</label
-                                    >
+                                    <label for="mqttPassword" class="form-label">MQTT {{ $t("Password") }}</label>
                                     <input
                                         id="mqttPassword"
                                         v-model="monitor.mqttPassword"
@@ -582,9 +571,7 @@
                                 </div>
 
                                 <div class="my-3">
-                                    <label for="mqttTopic" class="form-label"
-                                        >MQTT {{ $t("Topic") }}</label
-                                    >
+                                    <label for="mqttTopic" class="form-label">MQTT {{ $t("Topic") }}</label>
                                     <input
                                         id="mqttTopic"
                                         v-model="monitor.mqttTopic"
@@ -601,8 +588,7 @@
                                     <label
                                         for="mqttSuccessMessage"
                                         class="form-label"
-                                        >MQTT {{ $t("successMessage") }}</label
-                                    >
+                                    >MQTT {{ $t("successMessage") }}</label>
                                     <input
                                         id="mqttSuccessMessage"
                                         v-model="monitor.mqttSuccessMessage"
@@ -620,8 +606,7 @@
                                     <label
                                         for="radius_username"
                                         class="form-label"
-                                        >Radius {{ $t("Username") }}</label
-                                    >
+                                    >Radius {{ $t("Username") }}</label>
                                     <input
                                         id="radius_username"
                                         v-model="monitor.radiusUsername"
@@ -635,8 +620,7 @@
                                     <label
                                         for="radius_password"
                                         class="form-label"
-                                        >Radius {{ $t("Password") }}</label
-                                    >
+                                    >Radius {{ $t("Password") }}</label>
                                     <input
                                         id="radius_password"
                                         v-model="monitor.radiusPassword"
@@ -650,8 +634,7 @@
                                     <label
                                         for="radius_secret"
                                         class="form-label"
-                                        >{{ $t("RadiusSecret") }}</label
-                                    >
+                                    >{{ $t("RadiusSecret") }}</label>
                                     <input
                                         id="radius_secret"
                                         v-model="monitor.radiusSecret"
@@ -668,10 +651,9 @@
                                     <label
                                         for="radius_called_station_id"
                                         class="form-label"
-                                        >{{
-                                            $t("RadiusCalledStationId")
-                                        }}</label
-                                    >
+                                    >{{
+                                        $t("RadiusCalledStationId")
+                                    }}</label>
                                     <input
                                         id="radius_called_station_id"
                                         v-model="monitor.radiusCalledStationId"
@@ -692,10 +674,9 @@
                                     <label
                                         for="radius_calling_station_id"
                                         class="form-label"
-                                        >{{
-                                            $t("RadiusCallingStationId")
-                                        }}</label
-                                    >
+                                    >{{
+                                        $t("RadiusCallingStationId")
+                                    }}</label>
                                     <input
                                         id="radius_calling_station_id"
                                         v-model="monitor.radiusCallingStationId"
@@ -717,18 +698,17 @@
                             <template
                                 v-if="
                                     monitor.type === 'sqlserver' ||
-                                    monitor.type === 'postgres' ||
-                                    monitor.type === 'mysql' ||
-                                    monitor.type === 'redis' ||
-                                    monitor.type === 'mongodb'
+                                        monitor.type === 'postgres' ||
+                                        monitor.type === 'mysql' ||
+                                        monitor.type === 'redis' ||
+                                        monitor.type === 'mongodb'
                                 "
                             >
                                 <div class="my-3">
                                     <label
                                         for="connectionString"
                                         class="form-label"
-                                        >{{ $t("Connection String") }}</label
-                                    >
+                                    >{{ $t("Connection String") }}</label>
                                     <input
                                         id="connectionString"
                                         v-model="
@@ -746,8 +726,7 @@
                                     <label
                                         for="mysql-password"
                                         class="form-label"
-                                        >{{ $t("Password") }}</label
-                                    >
+                                    >{{ $t("Password") }}</label>
                                     <!-- TODO: Rename monitor.radiusPassword to monitor.password for general use -->
                                     <HiddenInput
                                         id="mysql-password"
@@ -761,8 +740,8 @@
                             <template
                                 v-if="
                                     monitor.type === 'sqlserver' ||
-                                    monitor.type === 'postgres' ||
-                                    monitor.type === 'mysql'
+                                        monitor.type === 'postgres' ||
+                                        monitor.type === 'mysql'
                                 "
                             >
                                 <div class="my-3">
@@ -782,13 +761,11 @@
 
                             <!-- Interval -->
                             <div class="my-3">
-                                <label for="interval" class="form-label"
-                                    >{{ $t("Heartbeat Interval") }} ({{
-                                        $t("checkEverySecond", [
-                                            monitor.interval,
-                                        ])
-                                    }})</label
-                                >
+                                <label for="interval" class="form-label">{{ $t("Heartbeat Interval") }} ({{
+                                    $t("checkEverySecond", [
+                                        monitor.interval,
+                                    ])
+                                }})</label>
                                 <!-----
                                 <input id="interval" v-model="monitor.interval" type="number" class="form-control" required :min="minInterval" step="1" :max="maxInterval" @blur="finishUpdateInterval">
 				-->
@@ -830,13 +807,11 @@
                             <div class="my-3">
                                 <label for="retry-interval" class="form-label">
                                     {{ $t("Heartbeat Retry Interval") }}
-                                    <span
-                                        >({{
-                                            $t("retryCheckEverySecond", [
-                                                monitor.retryInterval,
-                                            ])
-                                        }})</span
-                                    >
+                                    <span>({{
+                                        $t("retryCheckEverySecond", [
+                                            monitor.retryInterval,
+                                        ])
+                                    }})</span>
                                 </label>
                                 <input
                                     id="retry-interval"
@@ -853,20 +828,18 @@
                             <div
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'ntp' ||
-                                    monitor.type === 'json-query'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'ntp' ||
+                                        monitor.type === 'json-query'
                                 "
                                 class="my-3"
                             >
-                                <label for="timeout" class="form-label"
-                                    >{{ $t("Request Timeout") }} ({{
-                                        $t("timeoutAfter", [
-                                            monitor.timeout ||
-                                                clampTimeout(monitor.interval),
-                                        ])
-                                    }})</label
-                                >
+                                <label for="timeout" class="form-label">{{ $t("Request Timeout") }} ({{
+                                    $t("timeoutAfter", [
+                                        monitor.timeout ||
+                                            clampTimeout(monitor.interval),
+                                    ])
+                                }})</label>
                                 <input
                                     id="timeout"
                                     v-model="monitor.timeout"
@@ -885,16 +858,12 @@
                                             "Resend Notification if Down X times consecutively",
                                         )
                                     }}
-                                    <span v-if="monitor.resendInterval > 0"
-                                        >({{
-                                            $t("resendEveryXTimes", [
-                                                monitor.resendInterval,
-                                            ])
-                                        }})</span
-                                    >
-                                    <span v-else
-                                        >({{ $t("resendDisabled") }})</span
-                                    >
+                                    <span v-if="monitor.resendInterval > 0">({{
+                                        $t("resendEveryXTimes", [
+                                            monitor.resendInterval,
+                                        ])
+                                    }})</span>
+                                    <span v-else>({{ $t("resendDisabled") }})</span>
                                 </label>
                                 <input
                                     id="resend-interval"
@@ -917,8 +886,8 @@
                             <div
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'json-query'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'json-query'
                                 "
                                 class="my-3 form-check"
                             >
@@ -940,8 +909,8 @@
                             <div
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'json-query'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'json-query'
                                 "
                                 class="my-3 form-check"
                             >
@@ -1022,17 +991,16 @@
                             <template
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'json-query' ||
-                                    monitor.type === 'grpc-keyword'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'json-query' ||
+                                        monitor.type === 'grpc-keyword'
                                 "
                             >
                                 <div class="my-3">
                                     <label
                                         for="maxRedirects"
                                         class="form-label"
-                                        >{{ $t("Max. Redirects") }}</label
-                                    >
+                                    >{{ $t("Max. Redirects") }}</label>
                                     <input
                                         id="maxRedirects"
                                         v-model="monitor.maxredirects"
@@ -1051,10 +1019,9 @@
                                     <label
                                         for="acceptedStatusCodes"
                                         class="form-label"
-                                        >{{
-                                            $t("Accepted Status Codes")
-                                        }}</label
-                                    >
+                                    >{{
+                                        $t("Accepted Status Codes")
+                                    }}</label>
 
                                     <VueMultiselect
                                         id="acceptedStatusCodes"
@@ -1085,8 +1052,7 @@
                                 <label
                                     for="monitorGroupSelector"
                                     class="form-label"
-                                    >{{ $t("Monitor Group") }}</label
-                                >
+                                >{{ $t("Monitor Group") }}</label>
                                 <ActionSelect
                                     id="monitorGroupSelector"
                                     v-model="monitor.parent"
@@ -1099,7 +1065,7 @@
                                     :options="parentMonitorOptionsList"
                                     :disabled="
                                         sortedGroupMonitorList.length === 0 &&
-                                        draftGroupName == null
+                                            draftGroupName == null
                                     "
                                     :icon="'plus'"
                                     :action="
@@ -1166,15 +1132,13 @@
                                                 notification.id,
                                             )
                                         "
-                                        >{{ $t("Edit") }}</a
-                                    >
+                                    >{{ $t("Edit") }}</a>
                                 </label>
 
                                 <span
                                     v-if="notification.isDefault == true"
                                     class="badge bg-primary ms-2"
-                                    >{{ $t("Default") }}</span
-                                >
+                                >{{ $t("Default") }}</span>
                             </div>
 
                             <button
@@ -1189,8 +1153,8 @@
                             <div
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'json-query'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'json-query'
                                 "
                             >
                                 <h2 class="mt-5 mb-2">{{ $t("Proxy") }}</h2>
@@ -1213,8 +1177,7 @@
                                     <label
                                         class="form-check-label"
                                         for="proxy-disable"
-                                        >{{ $t("No Proxy") }}</label
-                                    >
+                                    >{{ $t("No Proxy") }}</label>
                                 </div>
 
                                 <div
@@ -1243,15 +1206,13 @@
                                             @click="
                                                 $refs.proxyDialog.show(proxy.id)
                                             "
-                                            >{{ $t("Edit") }}</a
-                                        >
+                                        >{{ $t("Edit") }}</a>
                                     </label>
 
                                     <span
                                         v-if="proxy.default === true"
                                         class="badge bg-primary ms-2"
-                                        >{{ $t("default") }}</span
-                                    >
+                                    >{{ $t("default") }}</span>
                                 </div>
 
                                 <button
@@ -1311,8 +1272,7 @@
                                         <label
                                             for="kafkaProducerSaslUsername"
                                             class="form-label"
-                                            >{{ $t("Username") }}</label
-                                        >
+                                        >{{ $t("Username") }}</label>
                                         <input
                                             id="kafkaProducerSaslUsername"
                                             v-model="
@@ -1334,8 +1294,7 @@
                                         <label
                                             for="kafkaProducerSaslPassword"
                                             class="form-label"
-                                            >{{ $t("Password") }}</label
-                                        >
+                                        >{{ $t("Password") }}</label>
                                         <input
                                             id="kafkaProducerSaslPassword"
                                             v-model="
@@ -1357,10 +1316,9 @@
                                         <label
                                             for="kafkaProducerSaslAuthorizationIdentity"
                                             class="form-label"
-                                            >{{
-                                                $t("Authorization Identity")
-                                            }}</label
-                                        >
+                                        >{{
+                                            $t("Authorization Identity")
+                                        }}</label>
                                         <input
                                             id="kafkaProducerSaslAuthorizationIdentity"
                                             v-model="
@@ -1383,8 +1341,7 @@
                                         <label
                                             for="kafkaProducerSaslAccessKeyId"
                                             class="form-label"
-                                            >{{ $t("AccessKey Id") }}</label
-                                        >
+                                        >{{ $t("AccessKey Id") }}</label>
                                         <input
                                             id="kafkaProducerSaslAccessKeyId"
                                             v-model="
@@ -1407,8 +1364,7 @@
                                         <label
                                             for="kafkaProducerSaslSecretAccessKey"
                                             class="form-label"
-                                            >{{ $t("Secret AccessKey") }}</label
-                                        >
+                                        >{{ $t("Secret AccessKey") }}</label>
                                         <input
                                             id="kafkaProducerSaslSecretAccessKey"
                                             v-model="
@@ -1431,8 +1387,7 @@
                                         <label
                                             for="kafkaProducerSaslSessionToken"
                                             class="form-label"
-                                            >{{ $t("Session Token") }}</label
-                                        >
+                                        >{{ $t("Session Token") }}</label>
                                         <input
                                             id="kafkaProducerSaslSessionToken"
                                             v-model="
@@ -1451,8 +1406,8 @@
                             <template
                                 v-if="
                                     monitor.type === 'http' ||
-                                    monitor.type === 'keyword' ||
-                                    monitor.type === 'json-query'
+                                        monitor.type === 'keyword' ||
+                                        monitor.type === 'json-query'
                                 "
                             >
                                 <h2 class="mt-5 mb-2">
@@ -1484,8 +1439,7 @@
                                     <label
                                         for="httpBodyEncoding"
                                         class="form-label"
-                                        >{{ $t("Body Encoding") }}</label
-                                    >
+                                    >{{ $t("Body Encoding") }}</label>
                                     <select
                                         id="httpBodyEncoding"
                                         v-model="monitor.httpBodyEncoding"
@@ -1555,7 +1509,7 @@
                                 <template
                                     v-if="
                                         monitor.authMethod &&
-                                        monitor.authMethod !== null
+                                            monitor.authMethod !== null
                                     "
                                 >
                                     <template
@@ -1565,8 +1519,7 @@
                                             <label
                                                 for="tls-cert"
                                                 class="form-label"
-                                                >{{ $t("Cert") }}</label
-                                            >
+                                            >{{ $t("Cert") }}</label>
                                             <textarea
                                                 id="tls-cert"
                                                 v-model="monitor.tlsCert"
@@ -1579,8 +1532,7 @@
                                             <label
                                                 for="tls-key"
                                                 class="form-label"
-                                                >{{ $t("Key") }}</label
-                                            >
+                                            >{{ $t("Key") }}</label>
                                             <textarea
                                                 id="tls-key"
                                                 v-model="monitor.tlsKey"
@@ -1593,8 +1545,7 @@
                                             <label
                                                 for="tls-ca"
                                                 class="form-label"
-                                                >{{ $t("CA") }}</label
-                                            >
+                                            >{{ $t("CA") }}</label>
                                             <textarea
                                                 id="tls-ca"
                                                 v-model="monitor.tlsCa"
@@ -1612,10 +1563,9 @@
                                             <label
                                                 for="oauth_auth_method"
                                                 class="form-label"
-                                                >{{
-                                                    $t("Authentication Method")
-                                                }}</label
-                                            >
+                                            >{{
+                                                $t("Authentication Method")
+                                            }}</label>
                                             <select
                                                 id="oauth_auth_method"
                                                 v-model="
@@ -1643,10 +1593,9 @@
                                             <label
                                                 for="oauth_token_url"
                                                 class="form-label"
-                                                >{{
-                                                    $t("OAuth Token URL")
-                                                }}</label
-                                            >
+                                            >{{
+                                                $t("OAuth Token URL")
+                                            }}</label>
                                             <input
                                                 id="oauth_token_url"
                                                 v-model="
@@ -1664,8 +1613,7 @@
                                             <label
                                                 for="oauth_client_id"
                                                 class="form-label"
-                                                >{{ $t("Client ID") }}</label
-                                            >
+                                            >{{ $t("Client ID") }}</label>
                                             <input
                                                 id="oauth_client_id"
                                                 v-model="
@@ -1681,7 +1629,7 @@
                                             v-if="
                                                 monitor.oauth_auth_method ===
                                                     'client_secret_post' ||
-                                                monitor.oauth_auth_method ===
+                                                    monitor.oauth_auth_method ===
                                                     'client_secret_basic'
                                             "
                                         >
@@ -1689,10 +1637,9 @@
                                                 <label
                                                     for="oauth_client_secret"
                                                     class="form-label"
-                                                    >{{
-                                                        $t("Client Secret")
-                                                    }}</label
-                                                >
+                                                >{{
+                                                    $t("Client Secret")
+                                                }}</label>
                                                 <input
                                                     id="oauth_client_secret"
                                                     v-model="
@@ -1710,10 +1657,9 @@
                                                 <label
                                                     for="oauth_scopes"
                                                     class="form-label"
-                                                    >{{
-                                                        $t("OAuth Scope")
-                                                    }}</label
-                                                >
+                                                >{{
+                                                    $t("OAuth Scope")
+                                                }}</label>
                                                 <input
                                                     id="oauth_scopes"
                                                     v-model="
@@ -1735,8 +1681,7 @@
                                             <label
                                                 for="basicauth-user"
                                                 class="form-label"
-                                                >{{ $t("Username") }}</label
-                                            >
+                                            >{{ $t("Username") }}</label>
                                             <input
                                                 id="basicauth-user"
                                                 v-model="
@@ -1752,8 +1697,7 @@
                                             <label
                                                 for="basicauth-pass"
                                                 class="form-label"
-                                                >{{ $t("Password") }}</label
-                                            >
+                                            >{{ $t("Password") }}</label>
                                             <input
                                                 id="basicauth-pass"
                                                 v-model="
@@ -1772,8 +1716,7 @@
                                                 <label
                                                     for="ntlm-domain"
                                                     class="form-label"
-                                                    >{{ $t("Domain") }}</label
-                                                >
+                                                >{{ $t("Domain") }}</label>
                                                 <input
                                                     id="ntlm-domain"
                                                     v-model="monitor.authDomain"
@@ -1787,10 +1730,9 @@
                                                 <label
                                                     for="ntlm-workstation"
                                                     class="form-label"
-                                                    >{{
-                                                        $t("Workstation")
-                                                    }}</label
-                                                >
+                                                >{{
+                                                    $t("Workstation")
+                                                }}</label>
                                                 <input
                                                     id="ntlm-workstation"
                                                     v-model="
@@ -1897,8 +1839,7 @@
                                         <label
                                             for="metadata"
                                             class="form-label"
-                                            >{{ $t("Metadata") }}</label
-                                        >
+                                        >{{ $t("Metadata") }}</label>
                                         <textarea
                                             id="metadata"
                                             v-model="monitor.grpcMetadata"
@@ -1977,7 +1918,7 @@ const monitorDefaults = {
     packetSize: 56,
     expiryNotification: false,
     maxredirects: 10,
-    accepted_statuscodes: ["200-299"],
+    accepted_statuscodes: [ "200-299" ],
     dns_resolve_type: "A",
     dns_resolve_server: "1.1.1.1",
     docker_container: "",
@@ -2080,11 +2021,11 @@ export default {
         },
 
         protoServicePlaceholder() {
-            return this.$t("Example:", ["Health"]);
+            return this.$t("Example:", [ "Health" ]);
         },
 
         protoMethodPlaceholder() {
-            return this.$t("Example:", ["check"]);
+            return this.$t("Example:", [ "check" ]);
         },
 
         protoBufDataPlaceholder() {

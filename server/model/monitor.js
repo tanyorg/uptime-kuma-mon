@@ -241,7 +241,7 @@ class Monitor extends BeanModel {
     async getTags() {
         return await R.getAll(
             "SELECT mt.*, tag.name, tag.color FROM monitor_tag mt JOIN tag ON mt.tag_id = tag.id WHERE mt.monitor_id = ? ORDER BY tag.name",
-            [this.id],
+            [ this.id ],
         );
     }
 
@@ -254,7 +254,7 @@ class Monitor extends BeanModel {
         let tlsInfoBean = await R.findOne(
             "monitor_tls_info",
             "monitor_id = ?",
-            [monitorID],
+            [ monitorID ],
         );
         let tlsInfo;
         if (tlsInfoBean) {
@@ -383,7 +383,7 @@ class Monitor extends BeanModel {
                 previousBeat = await R.findOne(
                     "heartbeat",
                     " monitor_id = ? ORDER BY time DESC",
-                    [this.id],
+                    [ this.id ],
                 );
             }
 
@@ -795,7 +795,7 @@ class Monitor extends BeanModel {
                     ) {
                         R.exec(
                             "UPDATE `monitor` SET dns_last_result = ? WHERE id = ? ",
-                            [dnsMessage, this.id],
+                            [ dnsMessage, this.id ],
                         );
                     }
 
@@ -1426,7 +1426,7 @@ class Monitor extends BeanModel {
         let tlsInfoBean = await R.findOne(
             "monitor_tls_info",
             "monitor_id = ?",
-            [this.id],
+            [ this.id ],
         );
 
         if (tlsInfoBean == null) {
@@ -1451,7 +1451,7 @@ class Monitor extends BeanModel {
                         log.debug("monitor", "Resetting sent_history");
                         await R.exec(
                             "DELETE FROM notification_sent_history WHERE type = 'certificate' AND monitor_id = ?",
-                            [this.id],
+                            [ this.id ],
                         );
                     } else {
                         log.debug("monitor", "No need to reset sent_history");
@@ -1513,7 +1513,7 @@ class Monitor extends BeanModel {
             WHERE time > DATETIME('now', ? || ' hours')
             AND ping IS NOT NULL
             AND monitor_id = ? `,
-                [-duration, monitorID],
+                [ -duration, monitorID ],
             ),
         );
 
@@ -1586,7 +1586,7 @@ class Monitor extends BeanModel {
             WHERE time > ?
             AND monitor_id = ?
         `,
-            [startTime, startTime, startTime, startTime, startTime, monitorID],
+            [ startTime, startTime, startTime, startTime, startTime, monitorID ],
         );
 
         timeLogger.print(`[Monitor: ${monitorID}][${duration}] sendUptime`);
@@ -1605,7 +1605,7 @@ class Monitor extends BeanModel {
             let status = parseInt(
                 await R.getCell(
                     "SELECT `status` FROM heartbeat WHERE monitor_id = ?",
-                    [monitorID],
+                    [ monitorID ],
                 ),
             );
 
@@ -1769,7 +1769,7 @@ class Monitor extends BeanModel {
     static async getNotificationList(monitor) {
         let notificationList = await R.getAll(
             "SELECT notification.* FROM notification, monitor_notification WHERE monitor_id = ? AND monitor_notification.notification_id = notification.id ",
-            [monitor.id],
+            [ monitor.id ],
         );
         return notificationList;
     }
@@ -1798,8 +1798,8 @@ class Monitor extends BeanModel {
             let notifyDays = await setting("tlsExpiryNotifyDays");
             if (notifyDays == null || !Array.isArray(notifyDays)) {
                 // Reset Default
-                setSetting("tlsExpiryNotifyDays", [7, 14, 21], "general");
-                notifyDays = [7, 14, 21];
+                setSetting("tlsExpiryNotifyDays", [ 7, 14, 21 ], "general");
+                notifyDays = [ 7, 14, 21 ];
             }
 
             if (Array.isArray(notifyDays)) {
@@ -1857,7 +1857,7 @@ class Monitor extends BeanModel {
     ) {
         let row = await R.getRow(
             "SELECT * FROM notification_sent_history WHERE type = ? AND monitor_id = ? AND days <= ?",
-            ["certificate", this.id, targetDays],
+            [ "certificate", this.id, targetDays ],
         );
 
         // Sent already, no need to send again
@@ -1889,7 +1889,7 @@ class Monitor extends BeanModel {
         if (sent) {
             await R.exec(
                 "INSERT INTO notification_sent_history (type, monitor_id, days) VALUES(?, ?, ?)",
-                ["certificate", this.id, targetDays],
+                [ "certificate", this.id, targetDays ],
             );
         }
     }
@@ -1905,7 +1905,7 @@ class Monitor extends BeanModel {
             SELECT ping, status, time FROM heartbeat
             WHERE id = (select MAX(id) from heartbeat where monitor_id = ?)
         `,
-            [monitorID],
+            [ monitorID ],
         );
     }
 
@@ -1920,7 +1920,7 @@ class Monitor extends BeanModel {
             SELECT maintenance_id FROM monitor_maintenance
             WHERE monitor_id = ?
         `,
-            [monitorID],
+            [ monitorID ],
         );
 
         for (const maintenanceID of maintenanceIDList) {
@@ -1971,7 +1971,7 @@ class Monitor extends BeanModel {
     			ON child.parent = parent.id
             WHERE child.id = ?
         `,
-            [monitorID],
+            [ monitorID ],
         );
     }
 
@@ -1986,7 +1986,7 @@ class Monitor extends BeanModel {
             SELECT * FROM monitor
             WHERE parent = ?
         `,
-            [monitorID],
+            [ monitorID ],
         );
     }
 
@@ -2042,7 +2042,7 @@ class Monitor extends BeanModel {
     static async unlinkAllChildren(groupID) {
         return await R.exec(
             "UPDATE `monitor` SET parent = ? WHERE parent = ? ",
-            [null, groupID],
+            [ null, groupID ],
         );
     }
 
