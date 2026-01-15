@@ -67,7 +67,9 @@ class NtpMonitor extends MonitorType {
                     heartbeat.status = 1;
 
                     // Detailed status message for the UI
-                    heartbeat.msg = `OK - Stratum: ${stratum}, RTT: ${rtt}ms, ServerTime: ${serverDate.toISOString().split(".")[0]}Z`;
+                    heartbeat.msg = `OK - Stratum: ${stratum}, RTT: ${rtt}ms, ServerTime: ${
+                        serverDate.toISOString().split(".")[0]
+                    }Z`;
 
                     // Map RTT to Uptime Kuma's latency chart
                     heartbeat.ping = rtt;
@@ -88,14 +90,21 @@ class NtpMonitor extends MonitorType {
             });
 
             // Send the request to target host
-            client.send(ntpBuffer, 0, 48, monitor.port || 123, monitor.hostname, (err) => {
-                if (err) {
-                    cleanup();
-                    heartbeat.status = 0;
-                    heartbeat.msg = "Send Failed: " + err.message;
-                    reject(err);
+            client.send(
+                ntpBuffer,
+                0,
+                48,
+                monitor.port || 123,
+                monitor.hostname,
+                (err) => {
+                    if (err) {
+                        cleanup();
+                        heartbeat.status = 0;
+                        heartbeat.msg = "Send Failed: " + err.message;
+                        reject(err);
+                    }
                 }
-            });
+            );
         });
     }
 }
