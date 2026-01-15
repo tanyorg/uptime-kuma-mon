@@ -1,0 +1,29 @@
+# Use the official Uptime Kuma image as the base
+FROM louislam/uptime-kuma:1.23.17
+
+# Set the working directory
+WORKDIR /app
+
+# 1. Install server-side dependencies
+RUN npm install ntp-client
+
+# 2. Copy the modified server-side source code
+COPY server/monitor-types/ntp-monitor-type.js ./server/monitor-types/
+COPY server/uptime-kuma-server.js ./server/
+
+# 3. Copy the frontend assets built on the host machine
+COPY dist/ ./dist/
+
+# Set correct ownership for the copied files
+# We do this as root before the entrypoint switches to the node user
+RUN chown -R node:node /app/server/monitor-types/ntp-monitor-type.js /app/server/uptime-kuma-server.js /app/dist
+
+# NOTE: Do not use 'USER node' here. 
+# The base image's entrypoint script requires root privileges to perform 
+# startup maintenance (like fixing volume permissions) before dropping 
+# privileges to the node user automatically.
+
+EXPOSE 3001
+
+# Start the application
+CMD ["node", "server/server.js"]

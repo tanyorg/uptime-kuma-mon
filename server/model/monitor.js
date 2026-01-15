@@ -1576,6 +1576,9 @@ class Monitor extends BeanModel {
 
     /** Make sure monitor interval is between bounds */
     validate() {
+	if (this.type === 'ntp' && this.interval < 30) {
+            this.interval = 30;
+        }
         if (this.interval > MAX_INTERVAL_SECOND) {
             throw new Error(`Interval cannot be more than ${MAX_INTERVAL_SECOND} seconds`);
         }
