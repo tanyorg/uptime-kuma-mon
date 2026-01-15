@@ -1,5 +1,5 @@
 const { MonitorType } = require("./monitor-type");
-const dgram = require('dgram');
+const dgram = require("dgram");
 
 class NtpMonitor extends MonitorType {
     /**
@@ -18,12 +18,12 @@ class NtpMonitor extends MonitorType {
         return new Promise((resolve, reject) => {
             // Convert timeout from seconds to milliseconds (Default: 10s)
             const timeoutMs = (monitor.timeout || 10) * 1000;
-            const client = dgram.createSocket('udp4');
-            
+            const client = dgram.createSocket("udp4");
+
             // Generate standard NTP Request Packet (48 bytes)
             // Settings: LI=0, VN=3 (NTP v3), Mode=3 (Client) -> 0x1b
             const ntpBuffer = Buffer.alloc(48);
-            ntpBuffer[0] = 0x1b; 
+            ntpBuffer[0] = 0x1b;
 
             const startTime = Date.now();
 
@@ -41,14 +41,14 @@ class NtpMonitor extends MonitorType {
              */
             const cleanup = () => {
                 clearTimeout(timer);
-                try { 
-                    client.close(); 
+                try {
+                    client.close();
                 } catch (e) {
                     // Ignore socket close errors
                 }
             };
 
-            client.on('message', (msg) => {
+            client.on("message", (msg) => {
                 const endTime = Date.now();
                 const rtt = endTime - startTime;
                 cleanup();
@@ -57,7 +57,7 @@ class NtpMonitor extends MonitorType {
                     // --- Full Packet Analysis ---
                     // Index 1: Stratum level (1=Primary, 2=Secondary, etc.)
                     const stratum = msg.readUInt8(1);
-                    
+
                     // Index 40-43: Transmit Timestamp (Seconds part)
                     // NTP era starts at 1900-01-01. Offset to Unix era (1970-01-01) is 2,208,988,800s.
                     const seconds = msg.readUInt32BE(40) - 2208988800;
@@ -65,14 +65,13 @@ class NtpMonitor extends MonitorType {
 
                     // Record success status
                     heartbeat.status = 1;
-                    
+
                     // Detailed status message for the UI
-                    // heartbeat.msg = `OK - Stratum: ${stratum}, RTT: ${rtt}ms, ServerTime: ${serverDate.toISOString().split('.')[0]}Z`;
-		    heartbeat.msg = `Stratum ${stratum} RTT ${rtt}ms`;
-                    
+                    heartbeat.msg = `OK - Stratum: ${stratum}, RTT: ${rtt}ms, ServerTime: ${serverDate.toISOString().split(".")[0]}Z`;
+
                     // Map RTT to Uptime Kuma's latency chart
-                    heartbeat.ping = rtt; 
-                    
+                    heartbeat.ping = rtt;
+
                     resolve();
                 } catch (e) {
                     heartbeat.status = 0;
@@ -81,7 +80,7 @@ class NtpMonitor extends MonitorType {
                 }
             });
 
-            client.on('error', (err) => {
+            client.on("error", (err) => {
                 cleanup();
                 heartbeat.status = 0;
                 heartbeat.msg = "UDP Communication Error: " + err.message;
