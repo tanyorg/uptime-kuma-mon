@@ -449,7 +449,6 @@ export default {
             return average ? this.$t("Avg. Ping") : this.$t("Ping");
         },
 
-
         /**
          * Get URL of monitor
          * @param {number} id ID of monitor
