@@ -11,6 +11,12 @@ The primary objective of this project is to provide integrated **NTP (Network Ti
 -   **NTP Server Health**: Monitor the responsiveness and synchronization status of your NTP servers.
 -   **Future Roadmap**: We are committed to further expanding the NTP monitoring suite, focusing on enhancing features such as detailed status metrics and offset visualization.
 
+## Screenshots
+
+### NTP Monitoring Dashboard
+
+<img src="docs/screenshots/status-page.png" width="800" alt="NTP Monitoring Dashboard" />
+
 ## Features
 
 This project is built upon the solid foundation of the original tool:
