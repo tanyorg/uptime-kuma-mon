@@ -2,46 +2,69 @@
     <transition name="slide-fade" appear>
         <div v-if="monitor">
             <router-link v-if="group !== ''" :to="monitorURL(monitor.parent)"> {{ group }}</router-link>
-            <h1> {{ monitor.name }}</h1>
+            <h1>{{ monitor.name }}</h1>
             <p v-if="monitor.description">{{ monitor.description }}</p>
             <div class="tags">
                 <Tag v-for="tag in monitor.tags" :key="tag.id" :item="tag" :size="'sm'" />
             </div>
             <p class="url">
-                <a v-if="monitor.type === 'http' || monitor.type === 'keyword' || monitor.type === 'json-query' || monitor.type === 'mp-health' " :href="monitor.url" target="_blank" rel="noopener noreferrer">{{ filterPassword(monitor.url) }}</a>
+                <a
+                    v-if="
+                        monitor.type === 'http' ||
+                        monitor.type === 'keyword' ||
+                        monitor.type === 'json-query' ||
+                        monitor.type === 'mp-health'
+                    "
+                    :href="monitor.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{{ filterPassword(monitor.url) }}</a
+                >
                 <span v-if="monitor.type === 'port'">TCP Port {{ monitor.hostname }}:{{ monitor.port }}</span>
                 <span v-if="monitor.type === 'ping'">Ping: {{ monitor.hostname }}</span>
                 <span v-if="monitor.type === 'keyword'">
-                    <br>
+                    <br />
                     <span>{{ $t("Keyword") }}: </span>
                     <span class="keyword">{{ monitor.keyword }}</span>
                     <span v-if="monitor.invertKeyword" alt="Inverted keyword" class="keyword-inverted"> ↧</span>
                 </span>
                 <span v-if="monitor.type === 'json-query'">
-                    <br>
+                    <br />
                     <span>{{ $t("Json Query") }}:</span> <span class="keyword">{{ monitor.jsonPath }}</span>
-                    <br>
+                    <br />
                     <span>{{ $t("Expected Value") }}:</span> <span class="keyword">{{ monitor.expectedValue }}</span>
                 </span>
-                <span v-if="monitor.type === 'dns'">[{{ monitor.dns_resolve_type }}] {{ monitor.hostname }}
-                    <br>
+                <span v-if="monitor.type === 'dns'"
+                    >[{{ monitor.dns_resolve_type }}] {{ monitor.hostname }}
+                    <br />
                     <span>{{ $t("Last Result") }}:</span> <span class="keyword">{{ monitor.dns_last_result }}</span>
                 </span>
                 <span v-if="monitor.type === 'docker'">Docker container: {{ monitor.docker_container }}</span>
-                <span v-if="monitor.type === 'gamedig'">Gamedig - {{ monitor.game }}: {{ monitor.hostname }}:{{ monitor.port }}</span>
-                <span v-if="monitor.type === 'grpc-keyword'">gRPC - {{ filterPassword(monitor.grpcUrl) }}
-                    <br>
+                <span v-if="monitor.type === 'gamedig'"
+                    >Gamedig - {{ monitor.game }}: {{ monitor.hostname }}:{{ monitor.port }}</span
+                >
+                <span v-if="monitor.type === 'grpc-keyword'"
+                    >gRPC - {{ filterPassword(monitor.grpcUrl) }}
+                    <br />
                     <span>{{ $t("Keyword") }}:</span> <span class="keyword">{{ monitor.keyword }}</span>
                 </span>
                 <span v-if="monitor.type === 'mongodb'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'mqtt'">MQTT: {{ monitor.hostname }}:{{ monitor.port }}/{{ monitor.mqttTopic }}</span>
+                <span v-if="monitor.type === 'mqtt'"
+                    >MQTT: {{ monitor.hostname }}:{{ monitor.port }}/{{ monitor.mqttTopic }}</span
+                >
                 <span v-if="monitor.type === 'mysql'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
                 <span v-if="monitor.type === 'postgres'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'push'">Push: <a :href="pushURL" target="_blank" rel="noopener noreferrer">{{ pushURL }}</a></span>
+                <span v-if="monitor.type === 'push'"
+                    >Push: <a :href="pushURL" target="_blank" rel="noopener noreferrer">{{ pushURL }}</a></span
+                >
                 <span v-if="monitor.type === 'radius'">Radius: {{ filterPassword(monitor.hostname) }}</span>
                 <span v-if="monitor.type === 'redis'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'sqlserver'">SQL Server: {{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'steam'">Steam Game Server: {{ monitor.hostname }}:{{ monitor.port }}</span>
+                <span v-if="monitor.type === 'sqlserver'"
+                    >SQL Server: {{ filterPassword(monitor.databaseConnectionString) }}</span
+                >
+                <span v-if="monitor.type === 'steam'"
+                    >Steam Game Server: {{ monitor.hostname }}:{{ monitor.port }}</span
+                >
             </p>
 
             <div class="functions">
@@ -49,13 +72,18 @@
                     <button v-if="monitor.active" class="btn btn-normal" @click="pauseDialog">
                         <font-awesome-icon icon="pause" /> {{ $t("Pause") }}
                     </button>
-                    <button v-if="! monitor.active" class="btn btn-primary" :disabled="monitor.forceInactive" @click="resumeMonitor">
+                    <button
+                        v-if="!monitor.active"
+                        class="btn btn-primary"
+                        :disabled="monitor.forceInactive"
+                        @click="resumeMonitor"
+                    >
                         <font-awesome-icon icon="play" /> {{ $t("Resume") }}
                     </button>
-                    <router-link :to=" '/edit/' + monitor.id " class="btn btn-normal">
+                    <router-link :to="'/edit/' + monitor.id" class="btn btn-normal">
                         <font-awesome-icon icon="edit" /> {{ $t("Edit") }}
                     </router-link>
-                    <router-link :to=" '/clone/' + monitor.id " class="btn btn-normal">
+                    <router-link :to="'/clone/' + monitor.id" class="btn btn-normal">
                         <font-awesome-icon icon="clone" /> {{ $t("Clone") }}
                     </router-link>
                     <button class="btn btn-danger" @click="deleteDialog">
@@ -68,10 +96,12 @@
                 <div class="row">
                     <div class="col-md-8">
                         <HeartbeatBar :monitor-id="monitor.id" />
-                        <span class="word">{{ $t("checkEverySecond", [ monitor.interval ]) }}</span>
+                        <span class="word">{{ $t("checkEverySecond", [monitor.interval]) }}</span>
                     </div>
                     <div class="col-md-4 text-center">
-                        <span class="badge rounded-pill" :class=" 'bg-' + status.color " style="font-size: 30px;">{{ status.text }}</span>
+                        <span class="badge rounded-pill" :class="'bg-' + status.color" style="font-size: 30px">{{
+                            status.text
+                        }}</span>
                     </div>
                 </div>
             </div>
@@ -79,7 +109,10 @@
             <!-- Stats -->
             <div class="shadow-box big-padding text-center stats">
                 <div class="row">
-                    <div v-if="monitor.type !== 'group'" class="col-12 col-sm col row d-flex align-items-center d-sm-block">
+                    <div
+                        v-if="monitor.type !== 'group'"
+                        class="col-12 col-sm col row d-flex align-items-center d-sm-block"
+                    >
                         <h4 class="col-4 col-sm-12">{{ pingTitle() }}</h4>
                         <p class="col-4 col-sm-12 mb-0 mb-sm-2">({{ $t("Current") }})</p>
                         <span class="col-4 col-sm-12 num">
@@ -88,7 +121,10 @@
                             </a>
                         </span>
                     </div>
-                    <div v-if="monitor.type !== 'group'" class="col-12 col-sm col row d-flex align-items-center d-sm-block">
+                    <div
+                        v-if="monitor.type !== 'group'"
+                        class="col-12 col-sm col row d-flex align-items-center d-sm-block"
+                    >
                         <h4 class="col-4 col-sm-12">{{ pingTitle(true) }}</h4>
                         <p class="col-4 col-sm-12 mb-0 mb-sm-2">(24{{ $t("-hour") }})</p>
                         <span class="col-4 col-sm-12 num">
@@ -112,9 +148,14 @@
 
                     <div v-if="tlsInfo" class="col-12 col-sm col row d-flex align-items-center d-sm-block">
                         <h4 class="col-4 col-sm-12">{{ $t("Cert Exp.") }}</h4>
-                        <p class="col-4 col-sm-12 mb-0 mb-sm-2">(<Datetime :value="tlsInfo.certInfo.validTo" date-only />)</p>
+                        <p class="col-4 col-sm-12 mb-0 mb-sm-2">
+                            (<Datetime :value="tlsInfo.certInfo.validTo" date-only />)
+                        </p>
                         <span class="col-4 col-sm-12 num">
-                            <a href="#" @click.prevent="toggleCertInfoBox = !toggleCertInfoBox">{{ tlsInfo.certInfo.daysRemaining }} {{ $tc("day", tlsInfo.certInfo.daysRemaining) }}</a>
+                            <a href="#" @click.prevent="toggleCertInfoBox = !toggleCertInfoBox"
+                                >{{ tlsInfo.certInfo.daysRemaining }}
+                                {{ $tc("day", tlsInfo.certInfo.daysRemaining) }}</a
+                            >
                         </span>
                     </div>
                 </div>
@@ -144,14 +185,18 @@
             <div v-if="monitor.type === 'real-browser'" class="shadow-box">
                 <div class="row">
                     <div class="col-md-6">
-                        <img :src="screenshotURL" alt style="width: 100%;">
+                        <img :src="screenshotURL" alt style="width: 100%" />
                     </div>
                 </div>
             </div>
 
             <div class="shadow-box table-shadow-box">
                 <div class="dropdown dropdown-clear-data">
-                    <button class="btn btn-sm btn-outline-danger dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <button
+                        class="btn btn-sm btn-outline-danger dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                    >
                         <font-awesome-icon icon="trash" /> {{ $t("Clear Data") }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -176,9 +221,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(beat, index) in displayedRecords" :key="index" style="padding: 10px;">
+                        <tr v-for="(beat, index) in displayedRecords" :key="index" style="padding: 10px">
                             <td><Status :status="beat.status" /></td>
-                            <td :class="{ 'border-0':! beat.msg}"><Datetime :value="beat.time" /></td>
+                            <td :class="{ 'border-0': !beat.msg }"><Datetime :value="beat.time" /></td>
                             <td class="border-0">{{ beat.msg }}</td>
                         </tr>
 
@@ -204,15 +249,33 @@
                 {{ $t("pauseMonitorMsg") }}
             </Confirm>
 
-            <Confirm ref="confirmDelete" btn-style="btn-danger" :yes-text="$t('Yes')" :no-text="$t('No')" @yes="deleteMonitor">
+            <Confirm
+                ref="confirmDelete"
+                btn-style="btn-danger"
+                :yes-text="$t('Yes')"
+                :no-text="$t('No')"
+                @yes="deleteMonitor"
+            >
                 {{ $t("deleteMonitorMsg") }}
             </Confirm>
 
-            <Confirm ref="confirmClearEvents" btn-style="btn-danger" :yes-text="$t('Yes')" :no-text="$t('No')" @yes="clearEvents">
+            <Confirm
+                ref="confirmClearEvents"
+                btn-style="btn-danger"
+                :yes-text="$t('Yes')"
+                :no-text="$t('No')"
+                @yes="clearEvents"
+            >
                 {{ $t("clearEventsMsg") }}
             </Confirm>
 
-            <Confirm ref="confirmClearHeartbeats" btn-style="btn-danger" :yes-text="$t('Yes')" :no-text="$t('No')" @yes="clearHeartbeats">
+            <Confirm
+                ref="confirmClearHeartbeats"
+                btn-style="btn-danger"
+                :yes-text="$t('Yes')"
+                :no-text="$t('No')"
+                @yes="clearHeartbeats"
+            >
                 {{ $t("clearHeartbeatsMsg") }}
             </Confirm>
         </div>
@@ -315,7 +378,7 @@ export default {
                 return this.$root.statusList[this.monitor.id];
             }
 
-            return { };
+            return {};
         },
 
         tlsInfo() {
@@ -352,11 +415,9 @@ export default {
 
         screenshotURL() {
             return getResBaseURL() + this.monitor.screenshot + "?time=" + this.cacheTime;
-        }
+        },
     },
-    mounted() {
-
-    },
+    mounted() {},
     methods: {
         getResBaseURL,
         /** Request a test notification be sent for this monitor */
@@ -414,7 +475,7 @@ export default {
         /** Request that this monitors events are cleared */
         clearEvents() {
             this.$root.clearEvents(this.monitor.id, (res) => {
-                if (! res.ok) {
+                if (!res.ok) {
                     toast.error(res.msg);
                 }
             });
@@ -423,7 +484,7 @@ export default {
         /** Request that this monitors heartbeats are cleared */
         clearHeartbeats() {
             this.$root.clearHeartbeats(this.monitor.id, (res) => {
-                if (! res.ok) {
+                if (!res.ok) {
                     toast.error(res.msg);
                 }
             });
@@ -468,9 +529,9 @@ export default {
                 return parsedUrl.toString();
             } catch (e) {
                 // Handle SQL Server
-                return urlString.replaceAll(/Password=(.+);/ig, "Password=******;");
+                return urlString.replaceAll(/Password=(.+);/gi, "Password=******;");
             }
-        }
+        },
     },
 };
 </script>
@@ -620,5 +681,4 @@ table {
 .tags > div:first-child {
     margin-left: 0 !important;
 }
-
 </style>

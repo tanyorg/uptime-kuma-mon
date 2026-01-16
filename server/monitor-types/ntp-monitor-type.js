@@ -48,6 +48,12 @@ class NtpMonitor extends MonitorType {
                 }
             };
 
+            /**
+             * Expected stratum level for the NTP server
+             * @type {number}
+             */
+            this.expectedStratum = monitor.expectedStratum || null;
+
             client.on("message", (msg) => {
                 const endTime = Date.now();
                 const rtt = endTime - startTime;
@@ -57,6 +63,14 @@ class NtpMonitor extends MonitorType {
                     // --- Full Packet Analysis ---
                     // Index 1: Stratum level (1=Primary, 2=Secondary, etc.)
                     const stratum = msg.readUInt8(1);
+
+                    // Check if the stratum matches the expected value
+                    if (this.expectedStratum !== null && stratum !== this.expectedStratum) {
+                        heartbeat.status = 0;
+                        heartbeat.msg = `Stratum mismatch: Expected ${this.expectedStratum}, but got ${stratum}`;
+                        reject(new Error(heartbeat.msg));
+                        return;
+                    }
 
                     // Index 40-43: Transmit Timestamp (Seconds part)
                     // NTP era starts at 1900-01-01. Offset to Unix era (1970-01-01) is 2,208,988,800s.
@@ -90,21 +104,14 @@ class NtpMonitor extends MonitorType {
             });
 
             // Send the request to target host
-            client.send(
-                ntpBuffer,
-                0,
-                48,
-                monitor.port || 123,
-                monitor.hostname,
-                (err) => {
-                    if (err) {
-                        cleanup();
-                        heartbeat.status = 0;
-                        heartbeat.msg = "Send Failed: " + err.message;
-                        reject(err);
-                    }
+            client.send(ntpBuffer, 0, 48, monitor.port || 123, monitor.hostname, (err) => {
+                if (err) {
+                    cleanup();
+                    heartbeat.status = 0;
+                    heartbeat.msg = "Send Failed: " + err.message;
+                    reject(err);
                 }
-            );
+            });
         });
     }
 }

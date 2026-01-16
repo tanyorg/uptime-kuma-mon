@@ -555,5 +555,7 @@
     "Icon Emoji": "絵文字アイコン",
     "ntp": "NTP",
     "ntpResponse": "応答時間",
-    "ntpAvgResponse": "平均応答時間"
+    "ntpAvgResponse": "平均応答時間",
+    "Expected Stratum": "期待されるストラタム",
+    "Current Stratum": "現在のストラタム"
 }

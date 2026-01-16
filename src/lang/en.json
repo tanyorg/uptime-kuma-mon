@@ -810,8 +810,8 @@
     "noGroupMonitorMsg": "Not Available. Create a Group Monitor First.",
     "Close": "Close",
     "Request Body": "Request Body",
-    "wayToGetFlashDutyKey":"You can go to Channel -> (Select a Channel) -> Integrations -> Add a new integration' page, add a 'Custom Event' to get a push address, copy the Integration Key in the address. For more information, please visit",
-    "FlashDuty Severity":"Severity",
+    "wayToGetFlashDutyKey": "You can go to Channel -> (Select a Channel) -> Integrations -> Add a new integration' page, add a 'Custom Event' to get a push address, copy the Integration Key in the address. For more information, please visit",
+    "FlashDuty Severity": "Severity",
     "nostrRelays": "Nostr relays",
     "nostrRelaysHelp": "One relay URL per line",
     "nostrSender": "Sender Private Key (nsec)",
@@ -824,5 +824,7 @@
     "apiKeysDisabledMsg": "API keys are disabled because authentication is disabled.",
     "ntp": "NTP",
     "ntpResponse": "Response Time",
-    "ntpAvgResponse": "Avg. Response Time"
+    "ntpAvgResponse": "Avg. Response Time",
+    "Expected Stratum": "Expected Stratum",
+    "Current Stratum": "Current Stratum"
 }
