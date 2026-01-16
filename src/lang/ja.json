@@ -553,5 +553,7 @@
     "A list of Notification Services can be found in Home Assistant under \"Developer Tools > Services\" search for \"notification\" to find your device/phone name.": "通知サービスの一覧からデバイス名を見つけるには、Home Assistantの「開発者ツール > サービス」から通知で検索してください。",
     "Notify Channel": "通知チャンネル",
     "Icon Emoji": "絵文字アイコン",
-    "ntp": "NTP"
+    "ntp": "NTP",
+    "ntpResponse": "応答時間",
+    "ntpAvgResponse": "平均応答時間"
 }

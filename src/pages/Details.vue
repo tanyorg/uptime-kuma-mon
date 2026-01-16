@@ -430,22 +430,25 @@ export default {
         },
 
         /**
-         * Return the correct title for the ping stat
-         * @param {boolean} [average=false] Is the statistic an average?
-         * @returns {string} Title formated dependant on monitor type
+         * Get the title for the ping chart/stats
+         * @param {boolean} average Whether to return the average title
+         * @returns {string} The translated title
          */
         pingTitle(average = false) {
-            let translationPrefix = "";
-            if (average) {
-                translationPrefix = "Avg. ";
+            // Special handling for NTP monitors using the new translation keys
+            if (this.monitor.type === "ntp") {
+                return average ? this.$t("ntpAvgResponse") : this.$t("ntpResponse");
             }
 
+            // Existing logic for HTTP-based monitors
             if (this.monitor.type === "http" || this.monitor.type === "keyword" || this.monitor.type === "json-query") {
-                return this.$t(translationPrefix + "Response");
+                return average ? this.$t("Avg. Response") : this.$t("Response");
             }
 
-            return this.$t(translationPrefix + "Ping");
+            // Default to "Ping" for other types
+            return average ? this.$t("Avg. Ping") : this.$t("Ping");
         },
+
 
         /**
          * Get URL of monitor
