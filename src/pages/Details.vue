@@ -11,14 +11,15 @@
                 <a
                     v-if="
                         monitor.type === 'http' ||
-                            monitor.type === 'keyword' ||
-                            monitor.type === 'json-query' ||
-                            monitor.type === 'mp-health'
+                        monitor.type === 'keyword' ||
+                        monitor.type === 'json-query' ||
+                        monitor.type === 'mp-health'
                     "
                     :href="monitor.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                >{{ filterPassword(monitor.url) }}</a>
+                    >{{ filterPassword(monitor.url) }}</a
+                >
                 <span v-if="monitor.type === 'port'">TCP Port {{ monitor.hostname }}:{{ monitor.port }}</span>
                 <span v-if="monitor.type === 'ping'">Ping: {{ monitor.hostname }}</span>
                 <span v-if="monitor.type === 'keyword'">
@@ -33,25 +34,37 @@
                     <br />
                     <span>{{ $t("Expected Value") }}:</span> <span class="keyword">{{ monitor.expectedValue }}</span>
                 </span>
-                <span v-if="monitor.type === 'dns'">[{{ monitor.dns_resolve_type }}] {{ monitor.hostname }}
+                <span v-if="monitor.type === 'dns'"
+                    >[{{ monitor.dns_resolve_type }}] {{ monitor.hostname }}
                     <br />
                     <span>{{ $t("Last Result") }}:</span> <span class="keyword">{{ monitor.dns_last_result }}</span>
                 </span>
                 <span v-if="monitor.type === 'docker'">Docker container: {{ monitor.docker_container }}</span>
-                <span v-if="monitor.type === 'gamedig'">Gamedig - {{ monitor.game }}: {{ monitor.hostname }}:{{ monitor.port }}</span>
-                <span v-if="monitor.type === 'grpc-keyword'">gRPC - {{ filterPassword(monitor.grpcUrl) }}
+                <span v-if="monitor.type === 'gamedig'"
+                    >Gamedig - {{ monitor.game }}: {{ monitor.hostname }}:{{ monitor.port }}</span
+                >
+                <span v-if="monitor.type === 'grpc-keyword'"
+                    >gRPC - {{ filterPassword(monitor.grpcUrl) }}
                     <br />
                     <span>{{ $t("Keyword") }}:</span> <span class="keyword">{{ monitor.keyword }}</span>
                 </span>
                 <span v-if="monitor.type === 'mongodb'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'mqtt'">MQTT: {{ monitor.hostname }}:{{ monitor.port }}/{{ monitor.mqttTopic }}</span>
+                <span v-if="monitor.type === 'mqtt'"
+                    >MQTT: {{ monitor.hostname }}:{{ monitor.port }}/{{ monitor.mqttTopic }}</span
+                >
                 <span v-if="monitor.type === 'mysql'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
                 <span v-if="monitor.type === 'postgres'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'push'">Push: <a :href="pushURL" target="_blank" rel="noopener noreferrer">{{ pushURL }}</a></span>
+                <span v-if="monitor.type === 'push'"
+                    >Push: <a :href="pushURL" target="_blank" rel="noopener noreferrer">{{ pushURL }}</a></span
+                >
                 <span v-if="monitor.type === 'radius'">Radius: {{ filterPassword(monitor.hostname) }}</span>
                 <span v-if="monitor.type === 'redis'">{{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'sqlserver'">SQL Server: {{ filterPassword(monitor.databaseConnectionString) }}</span>
-                <span v-if="monitor.type === 'steam'">Steam Game Server: {{ monitor.hostname }}:{{ monitor.port }}</span>
+                <span v-if="monitor.type === 'sqlserver'"
+                    >SQL Server: {{ filterPassword(monitor.databaseConnectionString) }}</span
+                >
+                <span v-if="monitor.type === 'steam'"
+                    >Steam Game Server: {{ monitor.hostname }}:{{ monitor.port }}</span
+                >
             </p>
 
             <div class="functions">
@@ -139,8 +152,10 @@
                             (<Datetime :value="tlsInfo.certInfo.validTo" date-only />)
                         </p>
                         <span class="col-4 col-sm-12 num">
-                            <a href="#" @click.prevent="toggleCertInfoBox = !toggleCertInfoBox">{{ tlsInfo.certInfo.daysRemaining }}
-                                {{ $tc("day", tlsInfo.certInfo.daysRemaining) }}</a>
+                            <a href="#" @click.prevent="toggleCertInfoBox = !toggleCertInfoBox"
+                                >{{ tlsInfo.certInfo.daysRemaining }}
+                                {{ $tc("day", tlsInfo.certInfo.daysRemaining) }}</a
+                            >
                         </span>
                     </div>
                 </div>
